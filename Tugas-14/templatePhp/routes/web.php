@@ -1,0 +1,34 @@
+<?php
+
+use App\Http\Controllers\Table;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('backend');
+});
+
+Route::get('/table', [Table::class, "table"]);
+Route::get('/data-tables', [Table::class, "data_table"]);
+
+Route::get('/test', function () {
+    DB::listen(function ($query) {
+        var_dump($query->sql, $query->bindings);
+    });
+
+    // Lakukan operasi atau query lainnya di sini
+    // ...
+
+    return "Check your terminal for query log.";
+});
